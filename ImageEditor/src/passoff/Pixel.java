@@ -2,11 +2,17 @@ package passoff;
 
 
 public class Pixel {
-    private int red;
-    private int green;
-    private int blue;
+    public int red;
+    public int green;
+    public int blue;
 
     public Pixel(int red, int green, int blue) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
+    public void setValues(int red, int green, int blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;
