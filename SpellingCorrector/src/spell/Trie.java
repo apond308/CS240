@@ -1,7 +1,10 @@
 package spell;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Trie implements ITrie {
 
@@ -22,7 +25,7 @@ public class Trie implements ITrie {
 	{
 		ArrayList<String> possible_words = new ArrayList<String>();
 		for (int x=0;x<word.length();x++) {
-			StringBuilder string = new StringBuilder(word);
+            StringBuilder string = new StringBuilder(word);
 			string.deleteCharAt(x);
 			possible_words.add(string.toString());
 
@@ -40,10 +43,11 @@ public class Trie implements ITrie {
 				string.setCharAt(x, (char)('a'+letter));
 				possible_words.add(string.toString());
 			}
-
+        }
+        for (int x=0;x<=word.length();x++) {
 			for (int letter=0;letter<26;letter++)
 			{
-				string = new StringBuilder(word);
+                StringBuilder string = new StringBuilder(word);
 				string.insert(x, (char)('a'+letter));
 				possible_words.add(string.toString());
 			}
@@ -53,22 +57,60 @@ public class Trie implements ITrie {
 
 	public String getBestMatch(String word)
 	{
+	    word = word.toLowerCase();
 		ArrayList<String> possible_words = getPossibleWords(word);
-		if (possible_words.size() > 0) {
-			for (String possible_word : possible_words)
-			{
-				if (find(possible_word) != null)
-					return possible_word;
-			}
-		}
-		else {
-			for (String possible_word : possible_words) {
-				possible_words.addAll(getPossibleWords(possible_word));
-			}
-			for (String possible_word : possible_words)
-				if (find(possible_word) != null)
-					return possible_word;
-		}
+        HashMap<String, Integer> found_words = new HashMap<>();
+		for (String possible_word : possible_words)
+        {
+            if (find(possible_word) != null)
+            {
+                if (found_words.containsKey(possible_word))
+                    found_words.put(possible_word,found_words.get(possible_word)+1);
+                else
+                    found_words.put(possible_word, 1);
+            }
+        }
+
+		String best_word = "";
+		int max_count = 0;
+		for (HashMap.Entry<String, Integer> entry : found_words.entrySet())
+        {
+            if (entry.getValue() >= max_count)
+            {
+                best_word = entry.getKey();
+                max_count = entry.getValue();
+            }
+        }
+		if (max_count > 0)
+		    return best_word;
+
+		ArrayList<String> next_possible_words = new ArrayList<>();
+        for (String possible_word : possible_words) {
+            next_possible_words.addAll(getPossibleWords(possible_word));
+        }
+        for (String possible_word : next_possible_words)
+        {
+            if (find(possible_word) != null)
+            {
+                if (found_words.containsKey(possible_word))
+                    found_words.put(possible_word,found_words.get(possible_word)+1);
+                else
+                    found_words.put(possible_word, 1);
+            }
+        }
+
+        best_word = "";
+        max_count = 0;
+        for (HashMap.Entry<String, Integer> entry : found_words.entrySet())
+        {
+            if (entry.getValue() > max_count)
+            {
+                best_word = entry.getKey();
+                max_count = entry.getValue();
+            }
+        }
+        if (max_count > 0)
+            return best_word;
 		return null;
 	}
 
