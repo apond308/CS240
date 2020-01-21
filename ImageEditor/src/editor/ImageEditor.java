@@ -1,7 +1,5 @@
 package editor;
 
-import passoff.Pixel;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -74,8 +72,6 @@ public class ImageEditor {
                 else if (args[2].equals("emboss"))
                 {
                     int v = 128;
-                    if (x==1 && y==1)
-                        System.out.println();
                     if (x != 0 && y != 0) {
                         int red_diff = red - image_array[y-1][x-1].red;
                         int green_diff = green - image_array[y-1][x-1].green;

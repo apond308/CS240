@@ -1,6 +1,7 @@
 package passoff;
 
 import editor.ImageEditor;
+import editor.Pixel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

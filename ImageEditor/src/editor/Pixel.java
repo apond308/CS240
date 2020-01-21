@@ -1,4 +1,4 @@
-package passoff;
+package editor;
 
 
 public class Pixel {
