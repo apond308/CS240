@@ -1,7 +1,5 @@
 package hangman;
 
-import org.junit.platform.commons.util.StringUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -46,25 +44,26 @@ public class EvilHangman {
             System.out.println("\nCurrent word: " + game.current_word);
 
             System.out.print("Enter letter: ");
-            String input = user_input.next();
+            String input = "";
 
-            while (input.length() > 1 || input.charAt(0) < 'A' || input.charAt(0) > 'z')
-            {
-                System.out.println("Invalid input. Try again:");
-                input = user_input.next();
-            }
+            boolean valid;
 
-            try {
-                dict = game.makeGuess(input.charAt(0));
-            } catch (GuessAlreadyMadeException e) {
-                System.out.println("You already used that letter.");
+            do{
+                valid = true;
                 input = user_input.next();
-                while (input.length() > 1 || input.charAt(0) < 'A' || input.charAt(0) > 'z')
-                {
+                while (input.length() > 1 || input.charAt(0) < 'A' || input.charAt(0) > 'z') {
+                    valid = false;
                     System.out.println("Invalid input. Try again:");
                     input = user_input.next();
                 }
-            }
+                try {
+                    dict = game.makeGuess(input.charAt(0));
+                } catch (GuessAlreadyMadeException e) {
+                    System.out.println("You already used that letter.");
+                    valid = false;
+                }
+            }while(!valid);
+
 
             if (game.current_word.equals(old_word)) {
                 System.out.println("Sorry, there are no " + input.charAt(0) + "'s");
