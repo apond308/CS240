@@ -12,9 +12,11 @@ import static java.lang.Math.pow;
 
 public class EvilHangmanGame implements IEvilHangmanGame{
 
-    SortedSet<Character> previous_guesses;
+    public SortedSet<Character> previous_guesses;
     HashSet<String> dictionary;
     private int word_length;
+
+    public String current_word;
 
     @Override
     public void startGame(File dictionary, int wordLength) throws IOException, EmptyDictionaryException {
@@ -32,6 +34,8 @@ public class EvilHangmanGame implements IEvilHangmanGame{
 
         if (this.dictionary.size() == 0)
             throw new EmptyDictionaryException();
+        current_word = "-".repeat(wordLength);
+        System.out.println(current_word);
     }
 
     @Override
@@ -69,6 +73,16 @@ public class EvilHangmanGame implements IEvilHangmanGame{
             if (word_group.getValue().size() > max_size || (word_group.getValue().size() == max_size && word_group.getKey() < worst_group)) {
                 worst_group = word_group.getKey();
                 max_size = word_group.getValue().size();
+            }
+        }
+
+        for (int x=0;x<word_length;x++)
+        {
+            if ((worst_group & (0x1 << x)) != 0)
+            {
+                StringBuilder temp = new StringBuilder(current_word);
+                temp.setCharAt(word_length-x-1, guess);
+                current_word = temp.toString();
             }
         }
 
