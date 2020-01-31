@@ -7,11 +7,11 @@ import java.sql.*;
 
 public class UserDao {
 
-    private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/db/family_map.db";
+    private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
     public static boolean addUser(User user) {
         try {
-            String sql_operation = "INSERT INTO users(id,username,password,email,first_name,last_name,gender) values("
+            String sql_operation = "INSERT INTO users(person_id,username,password,email,first_name,last_name,gender) values("
                     + user.toString() + ")";
             PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
             statement.executeUpdate();
@@ -31,7 +31,7 @@ public class UserDao {
             ResultSet rs = statement.executeQuery();
             DriverManager.getConnection(url).close();
             if (rs.next()){
-                User new_user = new User(rs.getString("id"), rs.getString("username"), rs.getString("password"),
+                User new_user = new User(rs.getString("person_id"), rs.getString("username"), rs.getString("password"),
                         rs.getString("email"), rs.getString("first_name"), rs.getString("last_name"),
                         rs.getString("gender"));
                 statement.close();

@@ -8,9 +8,9 @@ public class FillService {
     public static FillResult fill(FillRequest r){
         FillResult result = new FillResult();
 
-        GenerateDataService.generateGenerations(r.username, r.generations);
+        int generations_added = GenerateDataService.generateGenerations(r.username, r.generations);
 
-        result.message = "Successully added 0 persons and " + r.generations + " events to the database.";
+        result.message = "Successully added " + generations_added + " persons and " + r.generations + " events to the database.";
         result.success = true;
 
         return result;

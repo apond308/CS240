@@ -39,11 +39,11 @@ public class FamilyMapServer {
 
     private void initializeTables() {
         // SQLite connection string
-        String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/db/family_map.db";
+        String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
         // SQL statement for creating user table
         String user_sql = "CREATE TABLE IF NOT EXISTS users(\n"
-                + "    id TEXT,\n"
+                + "    person_id TEXT,\n"
                 + "    username TEXT,\n"
                 + "    password TEXT,\n"
                 + "    email TEXT,\n"

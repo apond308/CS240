@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class AuthTokenDao {
 
-    private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/db/family_map.db";
+    private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
     public static String getUserFromToken(String token){
         try {

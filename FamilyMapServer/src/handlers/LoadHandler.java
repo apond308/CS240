@@ -5,6 +5,11 @@ import com.google.gson.JsonSyntaxException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import requests.LoadRequest;
+import requests.LoginRequest;
+import responses.ClearResult;
+import responses.LoadResult;
+import services.ClearService;
+import services.LoadService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,39 +19,44 @@ import java.util.Scanner;
 public class LoadHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        LoadResult result = new LoadResult();
 
         if (!exchange.getRequestMethod().equals("POST")){
+            result.message = "Bad method";
+            result.success = false;
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-            exchange.getResponseBody().close();
-            return;
+        }
+        if (result.success)
+        {
+            try {
+                ClearResult clear_result = ClearService.clear();
+                if (!clear_result.success)
+                    throw new IOException();
+
+                InputStream request_body = exchange.getRequestBody();
+                Scanner s = new Scanner(request_body).useDelimiter("\\A");
+                String body_string = s.hasNext() ? s.next() : "";
+
+                LoadRequest request = new Gson().fromJson(body_string, LoadRequest.class);
+                if (!request.checkIfValid())
+                    throw new IOException();
+
+                result = LoadService.load(request);
+                if (result.success)
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                else
+                    throw new IOException();
+
+            } catch (IOException e) {
+                result.message = "Internal server error";
+                result.success = false;
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
+                e.printStackTrace();
+            }
         }
 
-        boolean success = true;
-        try {
-
-            InputStream request_body = exchange.getRequestBody();
-
-            Scanner s = new Scanner(request_body).useDelimiter("\\A");
-            String body_string = s.hasNext() ? s.next() : "";
-
-            Gson gson = new Gson();
-            requests.LoadRequest request = gson.fromJson(body_string, LoadRequest.class);
-            success = request.checkIfValid();
-        }
-        catch (JsonSyntaxException e) {
-            System.out.println("Bad json formatting in request body");
-            success = false;
-        }
-
-        if (!success) {
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
-            exchange.getResponseBody().close();
-            return;
-        }
-
-        // LOAD
-
-        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        String response_body = new Gson().toJson(result, ClearResult.class);
+        exchange.getResponseBody().write(response_body.getBytes());
         exchange.getResponseBody().close();
     }
 }
