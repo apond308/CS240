@@ -3,13 +3,24 @@ package services;
 import dao.PersonDao;
 import models.Person;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 public class GenerateDataService {
+
+    final static String male_name_path = new File("").getAbsolutePath() + "/data/names/male.txt";
+    final static String female_name_path = new File("").getAbsolutePath() + "/data/names/female.txt";
+    final static String last_name_path = new File("").getAbsolutePath() + "/data/names/last.txt";
 
     public static String generateGenerations(String username, int count){
         Person root = new Person(username);
         Person previous_person = root;
-        previous_person.first_name = "first_name";
-        previous_person.last_name = "last_name";
+        previous_person.first_name = getName(male_name_path);
+        previous_person.last_name = getName(last_name_path);
         previous_person.gender = "m";
         previous_person.id = username + previous_person.first_name + previous_person.last_name + previous_person.gender;
 
@@ -34,6 +45,19 @@ public class GenerateDataService {
         }
 
         return root.id;
+    }
+
+    public static String getName(String path) {
+        ArrayList<String> name_list = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            String[] input_file = Files.readString(Paths.get(path)).split("\\s+");
+            name_list.addAll(Arrays.asList(input_file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int index = new Random().nextInt(name_list.size()-1);
+        return name_list.get(index);
     }
 
 }
