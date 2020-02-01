@@ -27,6 +27,7 @@ public class LoginService {
         }
 
         result.authToken = UUID.randomUUID().toString();
+        result.userName = test_user.userName;
         result.personID = test_user.personID;
         result.success = AuthTokenDao.updateToken(r.userName, result.authToken);
 

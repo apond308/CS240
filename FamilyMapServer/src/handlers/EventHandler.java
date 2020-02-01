@@ -4,11 +4,8 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import dao.EventDao;
-import dao.PersonDao;
 import models.Event;
-import models.Person;
 import responses.EventResult;
-import responses.FillResult;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -27,26 +24,30 @@ public class EventHandler implements HttpHandler {
             return;
         }
 
+        System.out.println("EVENT REQUEST");
+
         URI uri = exchange.getRequestURI();
         String[] segments = uri.getPath().split("/");
 
         if (segments.length == 3) {
-            System.out.println("done setting persons");
+            System.out.println("Getting one person");
             String id = segments[2];
             Event e = EventDao.getEvent(id);
             assert e != null;
-            result.associatedUsername = e.username;
-            result.eventID = e.id;
-            result.personID = e.person_id;
+            result.associatedUsername = e.associatedUsername;
+            result.eventID = e.eventID;
+            result.personID = e.personID;
             result.latitude = e.latitude;
             result.longitude = e.longitude;
             result.country = e.country;
             result.city = e.city;
-            result.type = e.type;
+            result.type = e.eventType;
             result.year = e.year;
         }
-        else
+        else {
+            System.out.println("Getting all persons");
             result.data = EventDao.getAllEvents();
+        }
 
         result.success = true;
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);

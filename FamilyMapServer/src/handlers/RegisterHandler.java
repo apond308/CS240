@@ -34,6 +34,8 @@ public class RegisterHandler implements HttpHandler {
             Scanner s = new Scanner(request_body).useDelimiter("\\A");
             String body_string = s.hasNext() ? s.next() : "";
 
+            System.out.println("REGISTER REQUEST: " + body_string);
+
             RegisterRequest request = new Gson().fromJson(body_string, RegisterRequest.class);
 
             if (!request.checkIfValid()) {

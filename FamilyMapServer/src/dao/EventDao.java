@@ -14,7 +14,7 @@ public class EventDao {
 
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
-    public static void addEvent(Event event_in){
+    public static boolean addEvent(Event event_in){
         try {
             String sql_operation = "INSERT INTO events(id,username,person_id,latitude,longitude," +
                     "country,city,type,year) values("
@@ -23,8 +23,10 @@ public class EventDao {
             statement.executeUpdate();
             statement.close();
             DriverManager.getConnection(url).close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

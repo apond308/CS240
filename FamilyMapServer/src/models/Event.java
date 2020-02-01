@@ -2,45 +2,45 @@ package models;
 
 public class Event {
 
-    public String id;
-    public String username;
-    public String person_id;
+    public String eventID;
+    public String associatedUsername;
+    public String personID;
     public String latitude;
     public String longitude;
     public String country;
     public String city;
-    public String type;
+    public String eventType;
     public String year;
 
-    public Event(String id, String username, String person_id, String type){
-        this.id = id;
-        this.username = username;
-        this.person_id = person_id;
-        this.type = type;
+    public Event(String eventID, String associatedUsername, String personID, String eventType){
+        this.eventID = eventID;
+        this.associatedUsername = associatedUsername;
+        this.personID = personID;
+        this.eventType = eventType;
     }
 
-    public Event(String id, String username, String person_id, String latitude,
-                 String longitude, String country, String city, String type, String year){
-        this.id = id;
-        this.username = username;
-        this.person_id = person_id;
+    public Event(String eventID, String associatedUsername, String personID, String latitude,
+                 String longitude, String country, String city, String eventType, String year){
+        this.eventID = eventID;
+        this.associatedUsername = associatedUsername;
+        this.personID = personID;
         this.latitude = latitude;
         this.longitude = longitude;
         this.country = country;
         this.city = city;
-        this.type = type;
+        this.eventType = eventType;
         this.year = year;
     }
 
     public String toString(){
-        return "'" + id + "','" +
-                username + "','" +
-                person_id + "','" +
+        return "'" + eventID + "','" +
+                associatedUsername + "','" +
+                personID + "','" +
                 latitude + "','" +
                 longitude + "','" +
                 country + "','" +
                 city + "','" +
-                type + "','" +
+                eventType + "','" +
                 year + "'";
     }
 

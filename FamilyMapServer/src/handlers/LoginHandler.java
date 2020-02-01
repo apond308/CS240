@@ -35,6 +35,8 @@ public class LoginHandler implements HttpHandler {
             Scanner s = new Scanner(request_body).useDelimiter("\\A");
             String body_string = s.hasNext() ? s.next() : "";
 
+            System.out.println("LOGIN REQUEST:\n" + body_string);
+
             LoginRequest request = new Gson().fromJson(body_string, LoginRequest.class);
 
             if (!request.checkIfValid()) {
@@ -44,7 +46,10 @@ public class LoginHandler implements HttpHandler {
             }
 
             result = LoginService.login(request);
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
+            if (result.success)
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
+            else
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
         }
         catch (JsonSyntaxException e) {
             System.out.println("Bad json formatting in request body");
@@ -52,8 +57,8 @@ public class LoginHandler implements HttpHandler {
             e.printStackTrace();
         }
 
-
         String response_body = new Gson().toJson(result, LoginResult.class);
+        System.out.println("LOGIN RESPONSE: \n" + response_body);
         exchange.getResponseBody().write(response_body.getBytes());
         exchange.getResponseBody().close();
     }

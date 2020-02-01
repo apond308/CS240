@@ -25,8 +25,11 @@ public class PersonHandler implements HttpHandler {
             return;
         }
 
+        System.out.println("PERSON REQUEST");
+
         URI uri = exchange.getRequestURI();
         String[] segments = uri.getPath().split("/");
+
 
         if (segments.length == 3) {
             String id = segments[2];

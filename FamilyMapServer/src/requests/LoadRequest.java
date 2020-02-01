@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class LoadRequest {
 
-    ArrayList<User> users;
-    ArrayList<Person> persons;
-    ArrayList<Event> events;
+    public ArrayList<User> users;
+    public ArrayList<Person> persons;
+    public ArrayList<Event> events;
 
     public boolean checkIfValid(){
         if (users == null)
