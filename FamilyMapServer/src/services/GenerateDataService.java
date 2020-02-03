@@ -2,7 +2,6 @@ package services;
 
 import dao.EventDao;
 import dao.PersonDao;
-import dao.UserDao;
 import models.Event;
 import models.Person;
 
@@ -23,20 +22,20 @@ public class GenerateDataService {
     private static ArrayList<Person> generateParents(Person current_person, int depth){
         ArrayList<Person> parents = new ArrayList<>();
 
-        Person father = new Person(UUID.randomUUID().toString(), current_person.username, getName(male_name_path), current_person.last_name, "m");
-        current_person.father_id = father.id;
-        Event father_birth = new Event(UUID.randomUUID().toString(), father.username, father.id, "birth");
+        Person father = new Person(UUID.randomUUID().toString(), current_person.personID, getName(male_name_path), current_person.lastName, "m");
+        current_person.fatherID = father.associatedUsername;
+        Event father_birth = new Event(UUID.randomUUID().toString(), father.personID, father.associatedUsername, "birth");
         EventDao.addEvent(father_birth);
 
-        Person mother = new Person(UUID.randomUUID().toString(), current_person.username, getName(female_name_path), getName(last_name_path), "f");
-        current_person.mother_id = mother.id;
-        Event mother_birth = new Event(UUID.randomUUID().toString(), father.username, father.id, "birth");
+        Person mother = new Person(UUID.randomUUID().toString(), current_person.personID, getName(female_name_path), getName(last_name_path), "f");
+        current_person.motherID = mother.associatedUsername;
+        Event mother_birth = new Event(UUID.randomUUID().toString(), father.personID, father.associatedUsername, "birth");
         EventDao.addEvent(mother_birth);
 
-        father.spouse_id = mother.id;
+        father.spouseID = mother.associatedUsername;
 
-        Event father_marriage = new Event(UUID.randomUUID().toString(), father.username, father.id, "marriage");
-        Event mother_marriage = new Event(UUID.randomUUID().toString(), mother.username, mother.id, "marriage");
+        Event father_marriage = new Event(UUID.randomUUID().toString(), father.personID, father.associatedUsername, "marriage");
+        Event mother_marriage = new Event(UUID.randomUUID().toString(), mother.personID, mother.associatedUsername, "marriage");
         EventDao.addEvent(father_marriage);
         EventDao.addEvent(mother_marriage);
 
@@ -57,8 +56,8 @@ public class GenerateDataService {
 
         assert current_person != null;
         ArrayList<Person> to_add = generateParents(current_person, generation_count);
-        current_person.father_id = to_add.get(0).id;
-        current_person.mother_id = to_add.get(1).id;
+        current_person.fatherID = to_add.get(0).associatedUsername;
+        current_person.motherID = to_add.get(1).associatedUsername;
 
         PersonDao.deleteUserPerson(username);
         to_add.add(0, current_person);

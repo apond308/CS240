@@ -19,8 +19,9 @@ public class AuthTokenDao {
             ResultSet rs = statement.executeQuery();
             DriverManager.getConnection(url).close();
             if (rs.next()){
+                String username = rs.getString("username");
                 statement.close();
-                return rs.getString("username");
+                return username;
             }
             else
                 return null;

@@ -75,9 +75,9 @@ public class PersonDao {
         }
     }
 
-    public static ArrayList<Person> getAllPersons(){
+    public static ArrayList<Person> getAllPersons(String username){
         try {
-            String sql_operation = "SELECT * FROM persons";
+            String sql_operation = "SELECT * FROM persons WHERE username = '" + username + "'";
             PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
             ResultSet rs = statement.executeQuery();
             DriverManager.getConnection(url).close();

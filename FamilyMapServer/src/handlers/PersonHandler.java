@@ -1,11 +1,12 @@
 package handlers;
 
 import com.google.gson.Gson;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import dao.AuthTokenDao;
 import dao.PersonDao;
 import models.Person;
-import responses.FillResult;
 import responses.PersonResult;
 
 import java.io.IOException;
@@ -18,12 +19,23 @@ public class PersonHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         PersonResult result = new PersonResult();
 
-        if (!exchange.getRequestMethod().equals("POST")){
+        if (!exchange.getRequestMethod().equals("GET")){
             result.message = "Bad method";
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
             exchange.getResponseBody().close();
             return;
         }
+
+        Headers headers = exchange.getRequestHeaders();
+        if (!headers.containsKey("Authorization")){
+            result.message = "Invalid auth token";
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
+            exchange.getResponseBody().close();
+            return;
+        }
+
+        String token = headers.getFirst("Authorization");
+        String username = AuthTokenDao.getUserFromToken(token);
 
         System.out.println("PERSON REQUEST");
 
@@ -34,17 +46,17 @@ public class PersonHandler implements HttpHandler {
         if (segments.length == 3) {
             String id = segments[2];
             Person p = PersonDao.getPerson(id);
-            result.associatedUsername = p.username;
-            result.personID = p.id;
-            result.firstName = p.first_name;
-            result.lastName = p.last_name;
+            result.associatedUsername = p.personID;
+            result.personID = p.associatedUsername;
+            result.firstName = p.firstName;
+            result.lastName = p.lastName;
             result.gender = p.gender;
-            result.fatherID = p.father_id;
-            result.motherID = p.mother_id;
-            result.spouseID = p.spouse_id;
+            result.fatherID = p.fatherID;
+            result.motherID = p.motherID;
+            result.spouseID = p.spouseID;
         }
         else
-            result.data = PersonDao.getAllPersons();
+            result.data = PersonDao.getAllPersons(username);
 
         result.success = true;
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);

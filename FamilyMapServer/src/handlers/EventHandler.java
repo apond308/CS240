@@ -1,8 +1,10 @@
 package handlers;
 
 import com.google.gson.Gson;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import dao.AuthTokenDao;
 import dao.EventDao;
 import models.Event;
 import responses.EventResult;
@@ -17,12 +19,24 @@ public class EventHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         EventResult result = new EventResult();
 
-        if (!exchange.getRequestMethod().equals("POST")){
+        if (!exchange.getRequestMethod().equals("GET")){
             result.message = "Bad method";
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
             exchange.getResponseBody().close();
             return;
         }
+
+        Headers headers = exchange.getRequestHeaders();
+        if (!headers.containsKey("Authorization")){
+            result.message = "Invalid auth token";
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
+            exchange.getResponseBody().close();
+            return;
+        }
+
+        String token = headers.getFirst("Authorization");
+        String username = AuthTokenDao.getUserFromToken(token);
+
 
         System.out.println("EVENT REQUEST");
 
@@ -46,12 +60,13 @@ public class EventHandler implements HttpHandler {
         }
         else {
             System.out.println("Getting all persons");
-            result.data = EventDao.getAllEvents();
+            result.data = EventDao.getAllEvents(username);
         }
 
         result.success = true;
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
         String response_body = new Gson().toJson(result, EventResult.class);
+        System.out.println(response_body);
         exchange.getResponseBody().write(response_body.getBytes());
         exchange.getResponseBody().close();
     }

@@ -51,9 +51,9 @@ public class EventDao {
         }
     }
 
-    public static ArrayList<Event> getAllEvents(){
+    public static ArrayList<Event> getAllEvents(String username){
         try {
-            String sql_operation = "SELECT * FROM events";
+            String sql_operation = "SELECT * FROM events WHERE username = '" + username + "'";
             PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
             ResultSet rs = statement.executeQuery();
             DriverManager.getConnection(url).close();

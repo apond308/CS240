@@ -2,43 +2,43 @@ package models;
 
 public class Person {
 
-    public String id;
-    public String username;
-    public String first_name;
-    public String last_name;
+    public String associatedUsername;
+    public String personID;
+    public String firstName;
+    public String lastName;
     public String gender;
-    public String father_id;
-    public String mother_id;
-    public String spouse_id;
+    public String fatherID;
+    public String motherID;
+    public String spouseID;
 
-    public Person(String id, String username, String first_name, String last_name, String gender) {
-        this.id = id;
-        this.username = username;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Person(String associatedUsername, String personID, String firstName, String lastName, String gender) {
+        this.associatedUsername = associatedUsername;
+        this.personID = personID;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.gender = gender;
     }
 
-    public Person(String id, String username, String first_name, String last_name, String gender, String father_id, String mother_id, String spouse_id) {
-        this.id = id;
-        this.username = username;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Person(String associatedUsername, String personID, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID) {
+        this.associatedUsername = associatedUsername;
+        this.personID = personID;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.gender = gender;
-        this.father_id = father_id;
-        this.mother_id = mother_id;
-        this.spouse_id = spouse_id;
+        this.fatherID = fatherID;
+        this.motherID = motherID;
+        this.spouseID = spouseID;
     }
 
     public String toString(){
-        return "'" + id + "','" +
-                username + "','" +
-                first_name + "','" +
-                last_name + "','" +
+        return "'" + personID + "','" +
+                associatedUsername + "','" +
+                firstName + "','" +
+                lastName + "','" +
                 gender + "','" +
-                father_id + "','" +
-                mother_id + "','" +
-                spouse_id + "'";
+                fatherID + "','" +
+                motherID + "','" +
+                spouseID + "'";
     }
 
 }
