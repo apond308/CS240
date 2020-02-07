@@ -19,32 +19,43 @@ public class GenerateDataService {
     final static String female_name_path = new File("").getAbsolutePath() + "/data/names/female.txt";
     final static String last_name_path = new File("").getAbsolutePath() + "/data/names/last.txt";
 
-    private static ArrayList<Person> generateParents(Person current_person, int depth){
+    private static ArrayList<Person> generateParents(Person current_person, String birth_year, int depth){
         ArrayList<Person> parents = new ArrayList<>();
 
-        Person father = new Person(UUID.randomUUID().toString(), current_person.personID, getName(male_name_path), current_person.lastName, "m");
-        current_person.fatherID = father.associatedUsername;
-        Event father_birth = new Event(UUID.randomUUID().toString(), father.personID, father.associatedUsername, "birth");
+
+        Person father = new Person(UUID.randomUUID().toString(), current_person.associatedUsername, getName(male_name_path), current_person.lastName, "m");
+        current_person.fatherID = father.personID;
+
+
+        Event father_birth = new Event(UUID.randomUUID().toString(), father.associatedUsername, father.personID, "birth", Person.generateBirth(birth_year));
         EventDao.addEvent(father_birth);
+        Event father_death = new Event(UUID.randomUUID().toString(), father.associatedUsername, father.personID, "death", Person.generateDeath(father_birth.year));
+        EventDao.addEvent(father_death);
 
-        Person mother = new Person(UUID.randomUUID().toString(), current_person.personID, getName(female_name_path), getName(last_name_path), "f");
-        current_person.motherID = mother.associatedUsername;
-        Event mother_birth = new Event(UUID.randomUUID().toString(), father.personID, father.associatedUsername, "birth");
+
+        Person mother = new Person(UUID.randomUUID().toString(), current_person.associatedUsername, getName(female_name_path), getName(last_name_path), "f");
+        current_person.motherID = mother.personID;
+
+        Event mother_birth = new Event(UUID.randomUUID().toString(), mother.associatedUsername, mother.personID, "birth", Person.generateBirth(birth_year));
         EventDao.addEvent(mother_birth);
+        Event mother_death = new Event(UUID.randomUUID().toString(), mother.associatedUsername, mother.personID, "death", Person.generateDeath(mother_birth.year));
+        EventDao.addEvent(mother_death);
 
-        father.spouseID = mother.associatedUsername;
 
-        Event father_marriage = new Event(UUID.randomUUID().toString(), father.personID, father.associatedUsername, "marriage");
-        Event mother_marriage = new Event(UUID.randomUUID().toString(), mother.personID, mother.associatedUsername, "marriage");
+        father.spouseID = mother.personID;
+        mother.spouseID = father.personID;
+
+        Event father_marriage = new Event(UUID.randomUUID().toString(), father.associatedUsername, father.personID, "marriage", Person.generateMarriage(father_birth.year));
+        Event mother_marriage = new Event(UUID.randomUUID().toString(), mother.associatedUsername, mother.personID, "marriage", Person.generateMarriage(mother_birth.year));
         EventDao.addEvent(father_marriage);
         EventDao.addEvent(mother_marriage);
 
         parents.add(father);
         parents.add(mother);
 
-        if (depth > 0) {
-            parents.addAll(generateParents(father, depth - 1));
-            parents.addAll(generateParents(mother, depth - 1));
+        if (depth > 1) {
+            parents.addAll(generateParents(father, father_birth.year, depth - 1));
+            parents.addAll(generateParents(mother, mother_birth.year, depth - 1));
         }
 
         return parents;
@@ -55,9 +66,14 @@ public class GenerateDataService {
         Person current_person = PersonDao.getUserPerson(username);
 
         assert current_person != null;
-        ArrayList<Person> to_add = generateParents(current_person, generation_count);
-        current_person.fatherID = to_add.get(0).associatedUsername;
-        current_person.motherID = to_add.get(1).associatedUsername;
+        Event person_birth = new Event(UUID.randomUUID().toString(), current_person.associatedUsername, current_person.personID, "birth", Person.generateBirth("2012"));
+        EventDao.addEvent(person_birth);
+        Event person_death = new Event(UUID.randomUUID().toString(), current_person.associatedUsername, current_person.personID, "death", Person.generateDeath(person_birth.year));
+        EventDao.addEvent(person_death);
+
+        ArrayList<Person> to_add = generateParents(current_person, person_birth.year, generation_count);
+        current_person.fatherID = to_add.get(0).personID;
+        current_person.motherID = to_add.get(1).personID;
 
         PersonDao.deleteUserPerson(username);
         to_add.add(0, current_person);

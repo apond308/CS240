@@ -19,54 +19,63 @@ public class EventHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         EventResult result = new EventResult();
 
-        if (!exchange.getRequestMethod().equals("GET")){
-            result.message = "Bad method";
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-            exchange.getResponseBody().close();
-            return;
+        try {
+
+            if (!exchange.getRequestMethod().equals("GET")) {
+                result.message = "Error: Bad method";
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
+                throw new IOException();
+            }
+
+            Headers headers = exchange.getRequestHeaders();
+            if (!headers.containsKey("Authorization")) {
+                result.message = "Error: Invalid auth token";
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                throw new IOException();
+            }
+
+            String token = headers.getFirst("Authorization");
+            String username = AuthTokenDao.getUserFromToken(token);
+            if (username == null) {
+                result.message = "Error: Invalid auth token";
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                throw new IOException();
+            }
+
+
+            System.out.println("EVENT REQUEST");
+
+            URI uri = exchange.getRequestURI();
+            String[] segments = uri.getPath().split("/");
+
+            if (segments.length == 3) {
+                String id = segments[2];
+                Event e = EventDao.getEvent(id);
+                assert e != null;
+                if (!e.associatedUsername.equals(username)) {
+                    result.message = "Error: Invalid auth token";
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                    throw new IOException();
+                }
+                result.associatedUsername = e.associatedUsername;
+                result.eventID = e.eventID;
+                result.personID = e.personID;
+                result.latitude = e.latitude;
+                result.longitude = e.longitude;
+                result.country = e.country;
+                result.city = e.city;
+                result.eventType = e.eventType;
+                result.year = e.year;
+            } else {
+                result.data = EventDao.getAllEvents(username);
+            }
+            result.success = true;
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        } catch (IOException e) {
+            result.success = false;
         }
 
-        Headers headers = exchange.getRequestHeaders();
-        if (!headers.containsKey("Authorization")){
-            result.message = "Invalid auth token";
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-            exchange.getResponseBody().close();
-            return;
-        }
-
-        String token = headers.getFirst("Authorization");
-        String username = AuthTokenDao.getUserFromToken(token);
-
-
-        System.out.println("EVENT REQUEST");
-
-        URI uri = exchange.getRequestURI();
-        String[] segments = uri.getPath().split("/");
-
-        if (segments.length == 3) {
-            System.out.println("Getting one person");
-            String id = segments[2];
-            Event e = EventDao.getEvent(id);
-            assert e != null;
-            result.associatedUsername = e.associatedUsername;
-            result.eventID = e.eventID;
-            result.personID = e.personID;
-            result.latitude = e.latitude;
-            result.longitude = e.longitude;
-            result.country = e.country;
-            result.city = e.city;
-            result.type = e.eventType;
-            result.year = e.year;
-        }
-        else {
-            System.out.println("Getting all persons");
-            result.data = EventDao.getAllEvents(username);
-        }
-
-        result.success = true;
-        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
         String response_body = new Gson().toJson(result, EventResult.class);
-        System.out.println(response_body);
         exchange.getResponseBody().write(response_body.getBytes());
         exchange.getResponseBody().close();
     }

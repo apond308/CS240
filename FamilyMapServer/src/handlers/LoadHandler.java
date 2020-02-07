@@ -22,7 +22,7 @@ public class LoadHandler implements HttpHandler {
         LoadResult result = new LoadResult();
 
         if (!exchange.getRequestMethod().equals("POST")){
-            result.message = "Bad method";
+            result.message = "Error: Bad method";
             result.success = false;
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
         }
@@ -50,7 +50,7 @@ public class LoadHandler implements HttpHandler {
                     throw new IOException();
 
             } catch (IOException e) {
-                result.message = "Internal server error";
+                result.message = "Error: Internal server error";
                 result.success = false;
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
                 e.printStackTrace();

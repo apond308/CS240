@@ -26,7 +26,7 @@ public class LoginHandler implements HttpHandler {
         try {
 
             if (!exchange.getRequestMethod().equals("POST")){
-                result.message = "Bad method";
+                result.message = "Error: Bad method";
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
                 throw new Exception();
             }
@@ -40,7 +40,7 @@ public class LoginHandler implements HttpHandler {
             LoginRequest request = new Gson().fromJson(body_string, LoginRequest.class);
 
             if (!request.checkIfValid()) {
-                result.message = "Request property missing or has invalid value";
+                result.message = "Error: Request property missing or has invalid value";
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
                 throw new Exception();
             }
@@ -52,7 +52,7 @@ public class LoginHandler implements HttpHandler {
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
         }
         catch (JsonSyntaxException e) {
-            System.out.println("Bad json formatting in request body");
+            System.out.println("Error: Bad json formatting in request body");
         } catch (Exception e) {
             e.printStackTrace();
         }

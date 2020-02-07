@@ -16,7 +16,7 @@ public class ClearHandler implements HttpHandler {
         ClearResult result = new ClearResult();
 
         if (!exchange.getRequestMethod().equals("POST")){
-            result.message = "Bad method";
+            result.message = "Error: Bad method";
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
             exchange.getResponseBody().close();
             return;

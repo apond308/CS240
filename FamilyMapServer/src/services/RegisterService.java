@@ -19,10 +19,10 @@ public class RegisterService {
 
         RegisterResult result = new RegisterResult();
 
-        if (UserDao.getUser(r.userName) != null)
+        User test_user = UserDao.getUser(r.userName);
+        if (test_user != null && !test_user.userName.equals(""))
         {
-            System.out.println("User already in database.");
-            result.message = "Username already taken by another user";
+            result.message = "Error: Username already taken by another user";
             result.success = false;
             return result;
         }

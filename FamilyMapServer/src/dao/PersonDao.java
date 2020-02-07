@@ -4,10 +4,7 @@ import models.Person;
 import models.User;
 
 import java.io.File;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -46,12 +43,10 @@ public class PersonDao {
                 statement.close();
                 return p;
             }
-            else
-                return null;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
     public static Person getPerson(String id){
@@ -67,22 +62,88 @@ public class PersonDao {
                 statement.close();
                 return p;
             }
-            else
-                return null;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
+    }
+
+    public static ArrayList<Person> getFamily(String username){
+        ArrayList<Person> family = new ArrayList<>();
+
+        User u = UserDao.getUser(username);
+        assert u != null;
+        Person p = PersonDao.getPerson(u.personID);
+
+        if (p == null)
+            return null;
+
+        family.add(p);
+        if (p.spouseID != null)
+            family.add(getPerson(p.spouseID));
+
+        family.addAll(getAncestors(p.personID));
+        family.addAll(getChildren(p.personID));
+
+        return family;
+    }
+
+    public static ArrayList<Person> getAncestors(String id){
+        ArrayList<Person> ancestors = new ArrayList<>();
+        if (id == null)
+            return ancestors;
+
+        // Get ancestors
+        Person current_person = PersonDao.getPerson(id);
+        assert current_person != null;
+        if (current_person.fatherID != null && !current_person.fatherID.equals("") && !current_person.fatherID.equals("null")) {
+            ancestors.add(getPerson(current_person.fatherID));
+            if (current_person.motherID != null && !current_person.motherID.equals("") && !current_person.motherID.equals("null"))
+                ancestors.add(getPerson(current_person.motherID));
+            ancestors.addAll(getAncestors(current_person.fatherID));
+        }
+        if (current_person.motherID != null && !current_person.motherID.equals("") && !current_person.motherID.equals("null")) {
+            ancestors.addAll(getAncestors(current_person.motherID));
+        }
+
+        return ancestors;
+    }
+
+    public static ArrayList<Person> getChildren(String id){
+        ArrayList<Person> person_list = new ArrayList<>();
+        Person p = getPerson(id);
+        if (p == null || p.personID.equals("") || p.personID.equals("null"))
+            return person_list;
+        try {
+            String sql_operation;
+            if (Objects.requireNonNull(getPerson(id)).gender.equals("m"))
+                sql_operation = "SELECT * FROM persons WHERE father_id = '" + id + "'";
+            else
+                sql_operation = "SELECT * FROM persons WHERE mother_id = '" + id + "'";
+            PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
+            ResultSet rs = statement.executeQuery();
+            DriverManager.getConnection(url).close();
+            while (rs.next()){
+                p = new Person(rs.getString("id"), rs.getString("username"), rs.getString("first_name"),
+                        rs.getString("last_name"), rs.getString("gender"), rs.getString("father_id"),
+                        rs.getString("mother_id"), rs.getString("spouse_id"));
+                person_list.add(p);
+                person_list.addAll(getChildren(p.personID));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person_list;
     }
 
     public static ArrayList<Person> getAllPersons(String username){
+        ArrayList<Person> person_list = new ArrayList<>();
         try {
             String sql_operation = "SELECT * FROM persons WHERE username = '" + username + "'";
             PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
             ResultSet rs = statement.executeQuery();
             DriverManager.getConnection(url).close();
 
-            ArrayList<Person> person_list = new ArrayList<>();
             while (rs.next()){
                 Person p = new Person(rs.getString("id"), rs.getString("username"), rs.getString("first_name"),
                         rs.getString("last_name"), rs.getString("gender"), rs.getString("father_id"),

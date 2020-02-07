@@ -12,7 +12,7 @@ public class EventResult {
     public String longitude;
     public String country;
     public String city;
-    public String type;
+    public String eventType;
     public String year;
 
     public ArrayList<Event> data;

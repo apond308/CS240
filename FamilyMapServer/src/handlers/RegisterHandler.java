@@ -25,7 +25,7 @@ public class RegisterHandler implements HttpHandler {
         try {
 
             if (!exchange.getRequestMethod().equals("POST")){
-                result.message = "Bad method";
+                result.message = "Error: Bad method";
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
                 throw new Exception();
             }
@@ -39,18 +39,22 @@ public class RegisterHandler implements HttpHandler {
             RegisterRequest request = new Gson().fromJson(body_string, RegisterRequest.class);
 
             if (!request.checkIfValid()) {
-                result.message = "Request property missing or has invalid value";
+                result.message = "Error: Request property missing or has invalid value";
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
                 throw new Exception();
             }
 
             result = RegisterService.register(request);
+            if (!result.success){
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                throw new Exception();
+            }
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
         }
         catch (JsonSyntaxException e) {
-            System.out.println("Bad json formatting in request body");
+            System.out.println("Error: Bad json formatting in request body");
         } catch (Exception e) {
-            e.printStackTrace();
+            result.success = false;
         }
 
 

@@ -54,14 +54,14 @@ public class FamilyMapServer {
 
         // SQL statement for creating Person table
         String person_sql = "CREATE TABLE IF NOT EXISTS persons(\n"
-                + "    id TEXT,\n"
-                + "    username TEXT,\n"
-                + "    first_name TEXT,\n"
-                + "    last_name TEXT,\n"
-                + "    gender TEXT,\n"
-                + "    father_id TEXT,\n"
-                + "    mother_id TEXT,\n"
-                + "    spouse_id TEXT\n"
+                + "    id TEXT NULL,\n"
+                + "    username TEXT NULL,\n"
+                + "    first_name TEXT NULL,\n"
+                + "    last_name TEXT NULL,\n"
+                + "    gender TEXT NULL,\n"
+                + "    father_id TEXT NULL,\n"
+                + "    mother_id TEXT NULL,\n"
+                + "    spouse_id TEXT NULL\n"
                 + ");";
 
         // SQL statement for creating Event table

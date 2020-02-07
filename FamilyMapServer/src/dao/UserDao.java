@@ -37,12 +37,10 @@ public class UserDao {
                 statement.close();
                 return new_user;
             }
-            else
-                return null;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
     public static void clear(){

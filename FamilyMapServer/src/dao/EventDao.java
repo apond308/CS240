@@ -73,6 +73,17 @@ public class EventDao {
         }
     }
 
+    public static void deleteUserEvents(String username){
+        try {
+            String sql_operation = "DELETE FROM events WHERE username = '" + username + "'";
+            PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void clear(){
         try {
             String sql_operation = "DELETE FROM events";
