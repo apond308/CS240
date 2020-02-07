@@ -23,12 +23,14 @@ public class DefaultHandler implements HttpHandler {
             OutputStream response = exchange.getResponseBody();
             String path;
             if (exchange.getRequestURI().toString().equals("/")) {
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 path = new File("web/index.html").getAbsolutePath();
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
             }
             else {
                 try {
                     path = new File("web" + exchange.getRequestURI()).getAbsolutePath();
+                    if (!Files.exists(Paths.get(path)))
+                        throw new NoSuchFileException(path);
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 }
                 catch (NoSuchFileException e){
