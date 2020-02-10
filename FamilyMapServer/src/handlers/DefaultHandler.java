@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 
 public class DefaultHandler implements HttpHandler {
 
+    private static final boolean theCake = true;
+
     @Override
     public void handle(HttpExchange exchange) {
 
