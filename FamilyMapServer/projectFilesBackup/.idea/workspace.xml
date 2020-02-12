@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3fdea55e-c765-4c01-9623-34b65b2af0f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FamilyMapServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FamilyMapServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/DefaultHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/DefaultHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ImageEditor/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageEditor/.idea/misc.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1X81CrYLVQ0cPZRljS8x12oiwmp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="/usr/lib/jvm" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/libs" />
+      <recent name="$PROJECT_DIR$/src/test/java/passoff" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/test" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="responses" />
+      <recent name="requests" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/libs" />
+      <recent name="$PROJECT_DIR$/jars" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.run">
+    <configuration name="FamilyMapServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.FamilyMapServer" />
+      <module name="FamilyMapServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="handlers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="run" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.run" />
+      <module name="FamilyMapServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="handlers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FamilyMapServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.java.passoff.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.java.passoff" />
+      <option name="MAIN_CLASS_NAME" value="test.java.passoff.ServerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerTest.testPersistence" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FamilyMapServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.java.passoff.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.java.passoff" />
+      <option name="MAIN_CLASS_NAME" value="test.java.passoff.ServerTest" />
+      <option name="METHOD_NAME" value="testPersistence(org.junit.jupiter.api.TestInfo)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.run" />
+        <item itemvalue="JUnit.ServerTest.testPersistence" />
+        <item itemvalue="JUnit.ServerTest" />
+        <item itemvalue="Application.FamilyMapServer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3fdea55e-c765-4c01-9623-34b65b2af0f3" name="Default Changelist" comment="" />
+      <created>1580412782243</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580412782243</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2338" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580422610396">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2338" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580422610396" />
+    <state x="2596" y="361" width="557" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580429122619">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2596" y="361" width="557" height="396" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580429122619" />
+    <state x="2688" y="268" width="374" height="582" key="#com.intellij.ide.util.MemberChooser" timestamp="1580506557275">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2688" y="268" width="374" height="582" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580506557275" />
+    <state x="1920" y="32" width="692" height="1048" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1580513392556">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1920" y="32" width="692" height="1048" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580513392556" />
+    <state x="2613" y="305" width="524" height="508" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580424492860">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2613" y="305" width="524" height="508" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580424492860" />
+    <state x="2624" y="300" width="497" height="539" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1581172829582">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2624" y="300" width="497" height="539" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581172829582" />
+    <state width="394" height="466" key="DebuggerActiveHint" timestamp="1580438504987">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="394" height="466" key="DebuggerActiveHint/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580438504987" />
+    <state x="2658" y="317" width="424" height="491" key="FileChooserDialogImpl" timestamp="1581172939264">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2658" y="317" width="424" height="491" key="FileChooserDialogImpl/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581172939264" />
+    <state width="1878" height="275" key="GridCell.Tab.0.bottom" timestamp="1581105972711">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="275" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972711" />
+    <state width="1878" height="275" key="GridCell.Tab.0.center" timestamp="1581105972711">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="275" key="GridCell.Tab.0.center/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972711" />
+    <state width="1878" height="275" key="GridCell.Tab.0.left" timestamp="1581105972711">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="275" key="GridCell.Tab.0.left/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972711" />
+    <state width="1878" height="275" key="GridCell.Tab.0.right" timestamp="1581105972711">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="275" key="GridCell.Tab.0.right/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972711" />
+    <state width="1878" height="340" key="GridCell.Tab.1.bottom" timestamp="1581105972708">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="340" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972708" />
+    <state width="1878" height="340" key="GridCell.Tab.1.center" timestamp="1581105972708">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="340" key="GridCell.Tab.1.center/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972708" />
+    <state width="1878" height="340" key="GridCell.Tab.1.left" timestamp="1581105972708">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="340" key="GridCell.Tab.1.left/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972708" />
+    <state width="1878" height="340" key="GridCell.Tab.1.right" timestamp="1581105972708">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1878" height="340" key="GridCell.Tab.1.right/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581105972708" />
+    <state x="2363" y="133" width="1024" height="852" key="SettingsEditor" timestamp="1581172940561">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2363" y="133" width="1024" height="852" key="SettingsEditor/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581172940561" />
+    <state width="960" height="524" key="XDebugger.FullValuePopup" timestamp="1581046911880">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="960" height="524" key="XDebugger.FullValuePopup/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1581046911880" />
+    <state x="2602" y="452" width="546" height="213" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1580419943162">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2602" y="452" width="546" height="213" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580419943162" />
+    <state x="2543" y="262" width="672" height="678" key="search.everywhere.popup" timestamp="1580510288338">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2543" y="262" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.32.1920.1048@1920.0.1920.1080" timestamp="1580510288338" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/dao/PersonDao.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
