@@ -15,6 +15,11 @@ import java.net.URI;
 
 public class PersonHandler implements HttpHandler {
 
+    /**
+     * Handler for person url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         PersonResult result = new PersonResult();

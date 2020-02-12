@@ -12,6 +12,11 @@ public class AuthTokenDao {
 
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
+    /**
+     * Return the user associated with an auth token
+     * @param token the token provided
+     * @return user associated with provided token
+     */
     public static String getUserFromToken(String token){
         try {
             String sql_operation = "SELECT * FROM auth WHERE token = '" + token + "'";
@@ -31,6 +36,12 @@ public class AuthTokenDao {
         }
     }
 
+    /**
+     * Update the token associated with a username
+     * @param username provided username
+     * @param token new token
+     * @return whether operation succeeded or not
+     */
     public static boolean updateToken(String username, String token){
         try {
             String sql_operation = "DELETE FROM auth\nWHERE username = '" + username + "'";
@@ -48,6 +59,9 @@ public class AuthTokenDao {
         }
     }
 
+    /**
+     * Clear the auth table
+     */
     public static void clear(){
         try {
             String sql_operation = "DELETE FROM auth";

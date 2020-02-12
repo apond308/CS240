@@ -12,6 +12,11 @@ public class PersonDao {
 
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
+    /**
+     * Add a person to the database
+     * @param p Person object
+     * @return whether the operation succeeded or not
+     */
     public static boolean addPerson(Person p){
         try {
             String sql_operation = "INSERT INTO persons(id,username,first_name,last_name,gender," +
@@ -28,6 +33,11 @@ public class PersonDao {
         return true;
     }
 
+    /**
+     * Get Person object of user
+     * @param username user name
+     * @return Person object of user
+     */
     public static Person getUserPerson(String username){
         try {
             String id = Objects.requireNonNull(UserDao.getUser(username)).personID;
@@ -49,6 +59,11 @@ public class PersonDao {
         return null;
     }
 
+    /**
+     * Get Person object from database
+     * @param id ID of person
+     * @return Person with id found in database, null if not found
+     */
     public static Person getPerson(String id){
         try {
             String sql_operation = "SELECT * FROM persons WHERE id = '" + id + "'";
@@ -68,6 +83,11 @@ public class PersonDao {
         return null;
     }
 
+    /**
+     * Get a person's family
+     * @param username user name of person
+     * @return List of persons
+     */
     public static ArrayList<Person> getFamily(String username){
         ArrayList<Person> family = new ArrayList<>();
 
@@ -88,7 +108,12 @@ public class PersonDao {
         return family;
     }
 
-    public static ArrayList<Person> getAncestors(String id){
+    /**
+     * Get all ancestors of person
+     * @param id person id
+     * @return list of ancestors
+     */
+    private static ArrayList<Person> getAncestors(String id){
         ArrayList<Person> ancestors = new ArrayList<>();
         if (id == null)
             return ancestors;
@@ -109,7 +134,12 @@ public class PersonDao {
         return ancestors;
     }
 
-    public static ArrayList<Person> getChildren(String id){
+    /**
+     * Get children of person
+     * @param id id of person
+     * @return list of children
+     */
+    private static ArrayList<Person> getChildren(String id){
         ArrayList<Person> person_list = new ArrayList<>();
         Person p = getPerson(id);
         if (p == null || p.personID.equals("") || p.personID.equals("null"))
@@ -136,6 +166,11 @@ public class PersonDao {
         return person_list;
     }
 
+    /**
+     * Get all persons associated with user
+     * @param username user name
+     * @return list of persons
+     */
     public static ArrayList<Person> getAllPersons(String username){
         ArrayList<Person> person_list = new ArrayList<>();
         try {
@@ -157,6 +192,10 @@ public class PersonDao {
         }
     }
 
+    /**
+     * delete person from database
+     * @param username user name of person
+     */
     public static void deleteUserPerson(String username){
         try {
             String id = Objects.requireNonNull(UserDao.getUser(username)).personID;
@@ -171,6 +210,9 @@ public class PersonDao {
         }
     }
 
+    /**
+     * clear person table in database
+     */
     public static void clear(){
         try {
             String sql_operation = "DELETE FROM persons";

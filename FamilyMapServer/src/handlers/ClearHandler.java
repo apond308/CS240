@@ -11,6 +11,11 @@ import java.net.HttpURLConnection;
 
 public class ClearHandler implements HttpHandler {
 
+    /**
+     * Handler for clear url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         ClearResult result = new ClearResult();

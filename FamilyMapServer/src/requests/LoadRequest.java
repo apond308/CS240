@@ -12,6 +12,10 @@ public class LoadRequest {
     public ArrayList<Person> persons;
     public ArrayList<Event> events;
 
+    /**
+     * Check if request is valid
+     * @return success
+     */
     public boolean checkIfValid(){
         if (users == null)
             return false;

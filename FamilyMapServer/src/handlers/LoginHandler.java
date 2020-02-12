@@ -16,10 +16,11 @@ import java.util.Scanner;
 
 public class LoginHandler implements HttpHandler {
 
-    private void setError(HttpExchange exchange, String message){
-
-    }
-
+    /**
+     * Handler for login url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         LoginResult result = new LoginResult();

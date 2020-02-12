@@ -13,6 +13,11 @@ import java.nio.file.Paths;
 
 public class DefaultHandler implements HttpHandler {
 
+    /**
+     * Handler for default url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) {
 

@@ -9,6 +9,11 @@ public class UserDao {
 
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
+    /**
+     * Add user to database
+     * @param user user bject
+     * @return whether the operation succeeded or not
+     */
     public static boolean addUser(User user) {
         try {
             String sql_operation = "INSERT INTO users(person_id,username,password,email,first_name,last_name,gender) values("
@@ -24,6 +29,11 @@ public class UserDao {
         return true;
     }
 
+    /**
+     * Get user from database
+     * @param username user name
+     * @return User object
+     */
     public static User getUser(String username){
         try {
             String sql_operation = "SELECT * FROM users WHERE username = '" + username + "'";
@@ -43,6 +53,9 @@ public class UserDao {
         return null;
     }
 
+    /**
+     * Clear user table in database
+     */
     public static void clear(){
         try {
             String sql_operation = "DELETE FROM users";

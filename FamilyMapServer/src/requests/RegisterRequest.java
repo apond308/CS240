@@ -11,6 +11,10 @@ public class RegisterRequest {
 
     public String getUserName() { return userName; }
 
+    /**
+     * Check if request is valid
+     * @return success
+     */
     public boolean checkIfValid()
     {
         if (userName == null)

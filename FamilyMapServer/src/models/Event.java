@@ -12,6 +12,14 @@ public class Event {
     public String eventType;
     public String year;
 
+    /**
+     * Create new event
+     * @param eventID id of event
+     * @param associatedUsername user name
+     * @param personID person id
+     * @param eventType type of event
+     * @param year year of event
+     */
     public Event(String eventID, String associatedUsername, String personID, String eventType, String year){
         this.eventID = eventID.equals("") ? null : eventID;
         this.associatedUsername = associatedUsername.equals("") ? null : associatedUsername;
@@ -20,6 +28,18 @@ public class Event {
         this.year = year.equals("") ? null : year;
     }
 
+    /**
+     *
+     * @param eventID id of event
+     * @param associatedUsername user name
+     * @param personID person id
+     * @param latitude latitude
+     * @param longitude longitude
+     * @param country country
+     * @param city city
+     * @param eventType type of event
+     * @param year year of event
+     * */
     public Event(String eventID, String associatedUsername, String personID, String latitude,
                  String longitude, String country, String city, String eventType, String year){
         this.eventID = eventID.equals("") ? null : eventID;
@@ -33,6 +53,10 @@ public class Event {
         this.year = year.equals("") ? null : year;
     }
 
+    /**
+     * convert event to string
+     * @return string of event
+     */
     public String toString(){
         return "'" + eventID + "','" +
                 associatedUsername + "','" +

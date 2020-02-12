@@ -14,6 +14,11 @@ import java.net.URI;
 
 public class FillHandler implements HttpHandler {
 
+    /**
+     * Handler for fill url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         FillResult result = new FillResult();

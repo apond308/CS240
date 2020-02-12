@@ -10,6 +10,16 @@ public class User {
     private String lastName;
     private String gender;
 
+    /**
+     * Create new User
+     * @param personID id
+     * @param userName user name
+     * @param password password
+     * @param email email
+     * @param firstName first name
+     * @param lastName last name
+     * @param gender gender
+     */
     public User(String personID,
                 String userName,
                 String password,
@@ -27,6 +37,10 @@ public class User {
         this.gender = gender;
     }
 
+    /**
+     * convert user to string
+     * @return user string
+     */
     public String toString(){
         return "'" + personID + "','" +
                 userName + "','" +

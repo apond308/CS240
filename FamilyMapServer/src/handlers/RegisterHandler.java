@@ -19,6 +19,11 @@ import java.util.stream.Collectors;
 
 public class RegisterHandler implements HttpHandler {
 
+    /**
+     * Handler for register url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         RegisterResult result = new RegisterResult();

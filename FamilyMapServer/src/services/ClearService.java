@@ -10,6 +10,10 @@ import responses.ClearResult;
 
 public class ClearService {
 
+    /**
+     * clear all databases
+     * @return result of clear operation
+     */
     public static ClearResult clear(){
         ClearResult result = new ClearResult();
 

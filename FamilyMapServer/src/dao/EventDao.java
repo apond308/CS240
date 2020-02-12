@@ -14,6 +14,11 @@ public class EventDao {
 
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
+    /**
+     * Add an event to the database
+     * @param event_in event to be added
+     * @return whether the operation succeeded or not
+     */
     public static boolean addEvent(Event event_in){
         try {
             String sql_operation = "INSERT INTO events(id,username,person_id,latitude,longitude," +
@@ -30,6 +35,11 @@ public class EventDao {
         }
     }
 
+    /**
+     * Get an event from the database
+     * @param id event id
+     * @return the event found, null if not found
+     */
     public static Event getEvent(String id){
         try {
             String sql_operation = "SELECT * FROM events WHERE id = '" + id + "'";
@@ -51,6 +61,11 @@ public class EventDao {
         }
     }
 
+    /**
+     * Get all events associated with a username
+     * @param username username provided
+     * @return ArrayList of events
+     */
     public static ArrayList<Event> getAllEvents(String username){
         try {
             String sql_operation = "SELECT * FROM events WHERE username = '" + username + "'";
@@ -73,6 +88,10 @@ public class EventDao {
         }
     }
 
+    /**
+     * Delete events of a user from the database
+     * @param username user name
+     */
     public static void deleteUserEvents(String username){
         try {
             String sql_operation = "DELETE FROM events WHERE username = '" + username + "'";
@@ -84,6 +103,9 @@ public class EventDao {
         }
     }
 
+    /**
+     * Clear events from the database
+     */
     public static void clear(){
         try {
             String sql_operation = "DELETE FROM events";

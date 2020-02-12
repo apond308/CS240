@@ -17,6 +17,12 @@ import java.net.HttpURLConnection;
 import java.util.Scanner;
 
 public class LoadHandler implements HttpHandler {
+
+    /**
+     * Handler for load url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         LoadResult result = new LoadResult();

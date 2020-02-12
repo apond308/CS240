@@ -15,6 +15,11 @@ import java.net.URI;
 
 public class EventHandler implements HttpHandler {
 
+    /**
+     * Handler for events url
+     * @param exchange HTTP request
+     * @throws IOException request error
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         EventResult result = new EventResult();
