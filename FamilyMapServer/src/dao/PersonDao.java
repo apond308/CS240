@@ -10,6 +10,9 @@ import java.util.Objects;
 
 public class PersonDao {
 
+    /**
+     * Database string
+     */
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
     /**
@@ -18,6 +21,8 @@ public class PersonDao {
      * @return whether the operation succeeded or not
      */
     public static boolean addPerson(Person p){
+        if (p == null)
+            return false;
         try {
             String sql_operation = "INSERT INTO persons(id,username,first_name,last_name,gender," +
                     "father_id,mother_id,spouse_id) values("

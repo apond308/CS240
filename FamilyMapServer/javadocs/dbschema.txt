@@ -1,0 +1,41 @@
+INSERT INTO users(person_id,username,password,email,first_name,last_name,gender) values(<values>)
+SELECT * FROM users WHERE username = '<username>'
+DELETE FROM auth WHERE username = '<username>'
+
+"CREATE TABLE IF NOT EXISTS users(\n"
+                + "    person_id TEXT,\n"
+                + "    username TEXT,\n"
+                + "    password TEXT,\n"
+                + "    email TEXT,\n"
+                + "    first_name TEXT,\n"
+                + "    last_name TEXT,\n"
+                + "    gender TEXT\n"
+                + ");";
+
+"CREATE TABLE IF NOT EXISTS persons(\n"
+                + "    id TEXT NULL,\n"
+                + "    username TEXT NULL,\n"
+                + "    first_name TEXT NULL,\n"
+                + "    last_name TEXT NULL,\n"
+                + "    gender TEXT NULL,\n"
+                + "    father_id TEXT NULL,\n"
+                + "    mother_id TEXT NULL,\n"
+                + "    spouse_id TEXT NULL\n"
+                + ");";
+
+"CREATE TABLE IF NOT EXISTS events(\n"
+                + "    id TEXT,\n"
+                + "    username TEXT,\n"
+                + "    person_id TEXT,\n"
+                + "    latitude TEXT,\n"
+                + "    longitude TEXT,\n"
+                + "    country TEXT,\n"
+                + "    city TEXT,\n"
+                + "    type TEXT,\n"
+                + "    year TEXT\n"
+                + ");";
+
+"CREATE TABLE IF NOT EXISTS auth(\n"
+                + "    username TEXT,\n"
+                + "    token TEXT\n"
+                + ");";

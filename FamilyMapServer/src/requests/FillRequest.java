@@ -2,7 +2,14 @@ package requests;
 
 public class FillRequest {
 
+    /**
+     * user name
+     */
     public String username;
+
+    /**
+     * generations
+     */
     public int generations;
 
     /**

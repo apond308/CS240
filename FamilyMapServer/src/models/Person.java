@@ -2,13 +2,44 @@ package models;
 
 public class Person {
 
+    /**
+     * user name
+     */
     public String associatedUsername;
+
+    /**
+     * person id
+     */
     public String personID;
+
+    /**
+     * first name of person
+     */
     public String firstName;
+
+    /**
+     * last name of person
+     */
     public String lastName;
+
+    /**
+     * gender
+     */
     public String gender;
+
+    /**
+     * father id
+     */
     public String fatherID;
+
+    /**
+     * mother id
+     */
     public String motherID;
+
+    /**
+     * spouse id
+     */
     public String spouseID;
 
     /**

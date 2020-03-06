@@ -7,6 +7,9 @@ import java.sql.*;
 
 public class UserDao {
 
+    /**
+     * Database string
+     */
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
     /**
@@ -15,6 +18,8 @@ public class UserDao {
      * @return whether the operation succeeded or not
      */
     public static boolean addUser(User user) {
+        if (user == null)
+            return false;
         try {
             String sql_operation = "INSERT INTO users(person_id,username,password,email,first_name,last_name,gender) values("
                     + user.toString() + ")";

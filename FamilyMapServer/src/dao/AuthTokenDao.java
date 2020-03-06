@@ -10,6 +10,9 @@ import java.sql.SQLException;
 
 public class AuthTokenDao {
 
+    /**
+     * Database string
+     */
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
     /**
@@ -43,6 +46,8 @@ public class AuthTokenDao {
      * @return whether operation succeeded or not
      */
     public static boolean updateToken(String username, String token){
+        if (username == null || token == null)
+            return false;
         try {
             String sql_operation = "DELETE FROM auth\nWHERE username = '" + username + "'";
             PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);

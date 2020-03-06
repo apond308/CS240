@@ -8,9 +8,20 @@ import java.util.ArrayList;
 
 public class LoadRequest {
 
-    public ArrayList<User> users;
-    public ArrayList<Person> persons;
-    public ArrayList<Event> events;
+    /**
+     * user list
+     */
+    public ArrayList<User> users = new ArrayList<>();
+
+    /**
+     * person list
+     */
+    public ArrayList<Person> persons = new ArrayList<>();
+
+    /**
+     * event list
+     */
+    public ArrayList<Event> events = new ArrayList<>();
 
     /**
      * Check if request is valid

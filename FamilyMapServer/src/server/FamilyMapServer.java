@@ -14,8 +14,16 @@ import java.sql.Statement;
 
 public class FamilyMapServer {
 
+    /**
+     * maximum connection queue size
+     */
     private static final int MAX_PENDING_CONNECTIONS = 12;
 
+    /**
+     * Run the server
+     * @param port port number to run the server on
+     * @throws IOException if can't start server
+     */
     public void run(int port) throws IOException {
         InetSocketAddress serverAddress = new InetSocketAddress(port);
         HttpServer server = HttpServer.create(serverAddress, 10);
@@ -25,6 +33,10 @@ public class FamilyMapServer {
         System.out.println("FamilyMapServer listening on port " + port);
     }
 
+    /**
+     * Create all of the HTTP handlers
+     * @param server server you create them for
+     */
     private void createHandlers(HttpServer server){
         server.createContext("/", new DefaultHandler());
         server.createContext("/user/register", new RegisterHandler());
@@ -36,7 +48,9 @@ public class FamilyMapServer {
         server.createContext("/event", new EventHandler());
     }
 
-
+    /**
+     * Init the database tables
+     */
     private void initializeTables() {
         // SQLite connection string
         String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";

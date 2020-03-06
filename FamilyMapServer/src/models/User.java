@@ -2,12 +2,39 @@ package models;
 
 public class User {
 
+    /**
+     * person id
+     */
     public String personID;
+
+    /**
+     * user name
+     */
     public String userName;
+
+    /**
+     * password
+     */
     private String password;
+
+    /**
+     * email
+     */
     private String email;
+
+    /**
+     * first name
+     */
     private String firstName;
+
+    /**
+     * last name
+     */
     private String lastName;
+
+    /**
+     * gender
+     */
     private String gender;
 
     /**

@@ -12,7 +12,11 @@ import responses.LoadResult;
 import java.io.IOException;
 
 public class LoadService {
-
+    /**
+     * Load data from provided JSON
+     * @param request request data
+     * @return result of load request
+     */
     public static LoadResult load(LoadRequest request) {
         LoadResult result = new LoadResult();
 
@@ -35,6 +39,7 @@ public class LoadService {
         result.message = "Successfully added " + request.users.size() +
                 " users, " + request.persons.size() + " persons, and " +
                 request.events.size() + " events to the database.";
+        result.success = true;
         return result;
     }
 

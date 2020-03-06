@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 public class EventDao {
 
+    /**
+     * Database string
+     */
     private static String url = "jdbc:sqlite:" + new File("").getAbsolutePath() + "/data/family_map.db";
 
     /**
@@ -20,6 +23,8 @@ public class EventDao {
      * @return whether the operation succeeded or not
      */
     public static boolean addEvent(Event event_in){
+        if (event_in == null)
+            return false;
         try {
             String sql_operation = "INSERT INTO events(id,username,person_id,latitude,longitude," +
                     "country,city,type,year) values("

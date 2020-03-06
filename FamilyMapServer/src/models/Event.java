@@ -2,14 +2,49 @@ package models;
 
 public class Event {
 
+    /**
+     * event id
+     */
     public String eventID;
+
+    /**
+     * username associated with event
+     */
     public String associatedUsername;
+
+    /**
+     * person id
+     */
     public String personID;
+
+    /**
+     * latitude of event
+     */
     public String latitude;
+
+    /**
+     * longitude of event
+     */
     public String longitude;
+
+    /**
+     * country of event
+     */
     public String country;
+
+    /**
+     * city of event
+     */
     public String city;
+
+    /**
+     * type of event
+     */
     public String eventType;
+
+    /**
+     * year of event
+     */
     public String year;
 
     /**

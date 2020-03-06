@@ -10,7 +10,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class LoginService {
-
+    /**
+     * Log a user in to the database
+     * @param r request data
+     * @return result of login request
+     */
     public static LoginResult login(LoginRequest r){
         LoginResult result = new LoginResult();
 

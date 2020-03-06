@@ -2,7 +2,14 @@ package requests;
 
 public class LoginRequest {
 
+    /**
+     * user name
+     */
     public String userName;
+
+    /**
+     * password
+     */
     public String password;
 
     /**

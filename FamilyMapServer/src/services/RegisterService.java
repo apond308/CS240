@@ -7,11 +7,17 @@ import models.Person;
 import models.User;
 import requests.RegisterRequest;
 import responses.RegisterResult;
+import server.GenerateData;
 
 import java.util.UUID;
 
 public class RegisterService {
 
+    /**
+     * Register a new user
+     * @param r request data incoming
+     * @return result of register service
+     */
     public static RegisterResult register(RegisterRequest r) {
 
         User new_user = new User(UUID.randomUUID().toString(), r.userName, r.password, r.email,
@@ -38,7 +44,7 @@ public class RegisterService {
         UserDao.addUser(new_user);
 
         // Generate 4 generations of ancestry
-        GenerateDataService.generateGenerations(r.userName, 4);
+        GenerateData.generateGenerations(r.userName, 4);
 
         result.success = true;
 

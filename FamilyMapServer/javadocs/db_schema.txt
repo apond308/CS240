@@ -1,3 +1,0 @@
-INSERT INTO users(person_id,username,password,email,first_name,last_name,gender) values(<values>)
-SELECT * FROM users WHERE username = '<username>'
-DELETE FROM auth WHERE username = '<username>'

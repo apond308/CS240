@@ -7,8 +7,10 @@ import java.util.UUID;
  */
 public class AuthToken {
 
+    /**
+     * user name
+     */
     private String username;
-    private String token;
 
     /**
      * Create new auth token
@@ -16,7 +18,6 @@ public class AuthToken {
      */
     public AuthToken(String name){
         username = name;
-        token = UUID.randomUUID().toString();
     }
 
     /**

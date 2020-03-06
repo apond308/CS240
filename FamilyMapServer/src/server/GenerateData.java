@@ -1,4 +1,4 @@
-package services;
+package server;
 
 import dao.EventDao;
 import dao.PersonDao;
@@ -13,12 +13,22 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
-public class GenerateDataService {
+public class GenerateData {
 
+    /**
+     * Paths to the name lists
+     */
     final static String male_name_path = new File("").getAbsolutePath() + "/data/names/male.txt";
     final static String female_name_path = new File("").getAbsolutePath() + "/data/names/female.txt";
     final static String last_name_path = new File("").getAbsolutePath() + "/data/names/last.txt";
 
+    /**
+     * Generate the parents for a certain person
+     * @param current_person the person we want to generate for
+     * @param birth_year birth year of person
+     * @param depth how many generation we want to generate
+     * @return list of persons generated
+     */
     private static ArrayList<Person> generateParents(Person current_person, String birth_year, int depth){
         ArrayList<Person> parents = new ArrayList<>();
 
@@ -61,6 +71,12 @@ public class GenerateDataService {
         return parents;
     }
 
+    /**
+     * Generate family data for a user
+     * @param username username of user
+     * @param generation_count how many generations we want to generate
+     * @return the amount of people added to the user
+     */
     public static int generateGenerations(String username, int generation_count){
         int added_count = 0;
         Person current_person = PersonDao.getUserPerson(username);
@@ -84,6 +100,11 @@ public class GenerateDataService {
         return added_count;
     }
 
+    /**
+     * Get the name of someone from the list
+     * @param path path of file to pull from
+     * @return name we got
+     */
     public static String getName(String path) {
         ArrayList<String> name_list = new ArrayList<>();
         try {

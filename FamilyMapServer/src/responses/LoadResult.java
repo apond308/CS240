@@ -8,11 +8,27 @@ import java.util.ArrayList;
 
 public class LoadResult {
 
+    /**
+     * list of users
+     */
     ArrayList<User> users;
+    /**
+     * list of persons
+     */
     ArrayList<Person> persons;
+    /**
+     * list of events
+     */
     ArrayList<Event> events;
 
+    /**
+     * status message
+     */
     public String message;
-    public boolean success = true;
+
+    /**
+     * success or not
+     */
+    public boolean success = false;
 
 }

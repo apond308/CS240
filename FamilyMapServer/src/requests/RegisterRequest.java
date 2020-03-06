@@ -2,11 +2,34 @@ package requests;
 
 public class RegisterRequest {
 
+    /**
+     * user name
+     */
     public String userName;
+
+    /**
+     * password
+     */
     public String password;
+
+    /**
+     * email
+     */
     public String email;
+
+    /**
+     * first name
+     */
     public String firstName;
+
+    /**
+     * last name
+     */
     public String lastName;
+
+    /**
+     * gender
+     */
     public String gender;
 
     public String getUserName() { return userName; }
