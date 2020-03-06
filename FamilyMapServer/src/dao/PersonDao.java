@@ -45,7 +45,12 @@ public class PersonDao {
      */
     public static Person getUserPerson(String username){
         try {
-            String id = Objects.requireNonNull(UserDao.getUser(username)).personID;
+            User test_user = UserDao.getUser(username);
+            String id = "";
+            if (test_user == null)
+                return null;
+            else
+                id = test_user.personID;
 
             String sql_operation = "SELECT * FROM persons WHERE id = '" + id + "'";
             PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
@@ -60,6 +65,7 @@ public class PersonDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
         return null;
     }
@@ -172,38 +178,17 @@ public class PersonDao {
     }
 
     /**
-     * Get all persons associated with user
-     * @param username user name
-     * @return list of persons
-     */
-    public static ArrayList<Person> getAllPersons(String username){
-        ArrayList<Person> person_list = new ArrayList<>();
-        try {
-            String sql_operation = "SELECT * FROM persons WHERE username = '" + username + "'";
-            PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);
-            ResultSet rs = statement.executeQuery();
-            DriverManager.getConnection(url).close();
-
-            while (rs.next()){
-                Person p = new Person(rs.getString("id"), rs.getString("username"), rs.getString("first_name"),
-                        rs.getString("last_name"), rs.getString("gender"), rs.getString("father_id"),
-                        rs.getString("mother_id"), rs.getString("spouse_id"));
-                person_list.add(p);
-            }
-            return person_list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * delete person from database
      * @param username user name of person
      */
     public static void deleteUserPerson(String username){
         try {
-            String id = Objects.requireNonNull(UserDao.getUser(username)).personID;
+            User test_user = UserDao.getUser(username);
+            String id = "";
+            if (test_user == null)
+                return;
+            else
+                id = test_user.personID;
 
             String sql_operation = "DELETE FROM persons WHERE id = '" + id + "'";
             PreparedStatement statement = DriverManager.getConnection(url).prepareStatement(sql_operation);

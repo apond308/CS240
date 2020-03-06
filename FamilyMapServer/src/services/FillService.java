@@ -15,6 +15,12 @@ public class FillService {
     public static FillResult fill(FillRequest r){
         FillResult result = new FillResult();
 
+        if (r.generations < 1)
+        {
+            result.success = false;
+            return result;
+        }
+
         EventDao.deleteUserEvents(r.username);
 
         int generations_added = GenerateData.generateGenerations(r.username, r.generations);

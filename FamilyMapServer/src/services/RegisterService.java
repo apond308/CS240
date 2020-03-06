@@ -48,11 +48,6 @@ public class RegisterService {
 
         result.success = true;
 
-//        else {
-//            result.message = "Internal server error";
-//            result.success = false;
-//        }
-
         return result;
     }
 

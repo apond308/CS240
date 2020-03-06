@@ -15,7 +15,7 @@ import services.RegisterService;
 class LoadServiceTest {
 
 	@Test
-	void test() {
+	void test_positive() {
 		Assertions.assertTrue(ClearService.clear().success);
 
 		LoadRequest load_request = new LoadRequest();
@@ -36,6 +36,18 @@ class LoadServiceTest {
 		load_request.persons.add(new Person("test_person_id2", "test_username2", "test_first2", "test_last2", "test_gender2"));
 
 		Assertions.assertTrue(LoadService.load(load_request).success);
+	}
+
+	@Test
+	void test_negative() {
+		Assertions.assertTrue(ClearService.clear().success);
+
+		LoadRequest load_request = new LoadRequest();
+
+		load_request.users.add(null);
+		load_request.users.add(null);
+
+		Assertions.assertFalse(LoadService.load(load_request).success);
 	}
 
 }

@@ -33,7 +33,7 @@ public class LoadService {
             }
         } catch (IOException e) {
             result.success = false;
-            e.printStackTrace();
+            return result;
         }
 
         result.message = "Successfully added " + request.users.size() +

@@ -48,8 +48,6 @@ public class EventHandler implements HttpHandler {
             }
 
 
-            System.out.println("EVENT REQUEST");
-
             URI uri = exchange.getRequestURI();
             String[] segments = uri.getPath().split("/");
 

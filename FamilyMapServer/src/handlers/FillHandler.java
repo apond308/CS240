@@ -30,8 +30,6 @@ public class FillHandler implements HttpHandler {
             return;
         }
 
-        System.out.println("FILL REQUEST");
-
         URI uri = exchange.getRequestURI();
         String[] segments = uri.getPath().split("/");
         String username = segments[2];

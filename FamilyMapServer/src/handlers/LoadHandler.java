@@ -43,8 +43,6 @@ public class LoadHandler implements HttpHandler {
                 Scanner s = new Scanner(request_body).useDelimiter("\\A");
                 String body_string = s.hasNext() ? s.next() : "";
 
-                System.out.println("LOAD REQUEST");
-
                 LoadRequest request = new Gson().fromJson(body_string, LoadRequest.class);
                 if (!request.checkIfValid())
                     throw new IOException();

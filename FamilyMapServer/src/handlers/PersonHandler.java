@@ -46,8 +46,6 @@ public class PersonHandler implements HttpHandler {
                 throw new IOException();
             }
 
-            System.out.println("PERSON REQUEST");
-
             URI uri = exchange.getRequestURI();
             String[] segments = uri.getPath().split("/");
 

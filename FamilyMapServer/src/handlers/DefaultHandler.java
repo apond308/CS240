@@ -22,8 +22,6 @@ public class DefaultHandler implements HttpHandler {
 
         try {
 
-            System.out.println("DEFAULT REQUEST");
-
             OutputStream response = exchange.getResponseBody();
             String path;
             if (exchange.getRequestURI().toString().equals("/")) {
