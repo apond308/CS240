@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Family Map</string>
+    <string name="text_host_ip">IP Address</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FamilyMapServer.iml" filepath="$PROJECT_DIR$/FamilyMapServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/FamilyMapServer1.iml" filepath="$PROJECT_DIR$/src/FamilyMapServer1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/fms_lib.iml" filepath="$PROJECT_DIR$/src/fms_lib.iml" />
     </modules>
   </component>
 </project>

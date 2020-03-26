@@ -32,6 +32,8 @@ public class LoginHandler implements HttpHandler {
                 throw new Exception();
             }
 
+            System.out.println("LOGIN");
+
             InputStream request_body = exchange.getRequestBody();
             Scanner s = new Scanner(request_body).useDelimiter("\\A");
             String body_string = s.hasNext() ? s.next() : "";

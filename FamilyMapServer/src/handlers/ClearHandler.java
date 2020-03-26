@@ -27,6 +27,8 @@ public class ClearHandler implements HttpHandler {
             return;
         }
 
+        System.out.println("CLEAR");
+
         result = ClearService.clear();
 
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);

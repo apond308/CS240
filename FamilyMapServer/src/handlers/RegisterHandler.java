@@ -34,6 +34,7 @@ public class RegisterHandler implements HttpHandler {
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
                 throw new Exception();
             }
+            System.out.println("REGISTER");
 
             InputStream request_body = exchange.getRequestBody();
             Scanner s = new Scanner(request_body).useDelimiter("\\A");
