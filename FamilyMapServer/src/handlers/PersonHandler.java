@@ -23,6 +23,7 @@ public class PersonHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         PersonResult result = new PersonResult();
+        System.out.println("PERSON");
         try {
 
             if (!exchange.getRequestMethod().equals("GET")) {

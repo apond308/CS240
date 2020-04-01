@@ -1,7 +1,8 @@
-package responses;
+package lib.responses;
 
-import models.Event;
 import java.util.ArrayList;
+
+import lib.models.Event;
 
 public class EventResult {
 

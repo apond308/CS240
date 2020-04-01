@@ -21,12 +21,12 @@ public class LoginService {
         User test_user = UserDao.getUser(r.userName);
         if (test_user == null)
         {
-            result.message = "Internal server error (cant find user)";
+            result.message = "[Internal server error] Can't find user";
             return result;
         }
 
         if (!test_user.getPassword().equals(r.password)){
-            result.message = "Internal server error (incorrect password)";
+            result.message = "[Internal server error] Incorrect password";
             return result;
         }
 

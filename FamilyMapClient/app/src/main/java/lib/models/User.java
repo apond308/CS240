@@ -1,4 +1,4 @@
-package models;
+package lib.models;
 
 public class User {
 

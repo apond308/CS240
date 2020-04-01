@@ -1,8 +1,8 @@
-package requests;
+package lib.requests;
 
-import models.Event;
-import models.Person;
-import models.User;
+import lib.models.Person;
+import lib.models.Event;
+import lib.models.User;
 
 import java.util.ArrayList;
 

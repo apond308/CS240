@@ -1,4 +1,4 @@
-package models;
+package lib.models;
 
 public class Person {
 
@@ -75,9 +75,9 @@ public class Person {
         this.firstName = firstName.equals("") ? null : firstName;
         this.lastName = lastName.equals("") ? null : lastName;
         this.gender = gender.equals("") ? null : gender;
-        this.fatherID = fatherID.equals("") ? null : fatherID;
-        this.motherID = motherID.equals("") ? null : motherID;
-        this.spouseID = spouseID.equals("") ? null : spouseID;
+        this.fatherID = fatherID==null || fatherID.equals("") ? null : fatherID;
+        this.motherID = motherID==null || motherID.equals("") ? null : motherID;
+        this.spouseID = spouseID==null || spouseID.equals("") ? null : spouseID;
     }
 
     /**

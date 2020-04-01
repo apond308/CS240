@@ -1,8 +1,8 @@
-package responses;
-
-import models.Person;
+package lib.responses;
 
 import java.util.ArrayList;
+
+import lib.models.Person;
 
 public class PersonResult {
 

@@ -1,10 +1,10 @@
 package lib.responses;
 
-import models.Event;
-import models.Person;
-import models.User;
-
 import java.util.ArrayList;
+
+import lib.models.Event;
+import lib.models.Person;
+import lib.models.User;
 
 public class LoadResult {
 

@@ -3,6 +3,8 @@ package com.familymapclient.fragments;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +15,17 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.familymapclient.UserData;
 import com.familymapclient.activities.MainActivity;
 import com.familymapclient.R;
 import com.familymapclient.net.HttpClient;
 
+import lib.models.Person;
+import lib.models.User;
 import lib.requests.LoginRequest;
 import lib.requests.RegisterRequest;
 import lib.responses.LoginResult;
+import lib.responses.PersonResult;
 import lib.responses.RegisterResult;
 
 public class LoginFragment extends Fragment {
@@ -42,8 +48,34 @@ public class LoginFragment extends Fragment {
     private EditText email_field;
     private RadioGroup gender_field;
 
+    private Button sign_in_button;
+    private Button register_button;
+
     public static LoginFragment newInstance() {
         return new LoginFragment();
+    }
+
+    private void checkIfButtonsAvailable(){
+        if (host_field.getText().toString().equals("") ||
+            port_field.getText().toString().equals("") ||
+            user_field.getText().toString().equals("") ||
+            password_field.getText().toString().equals(""))
+        {
+            sign_in_button.setEnabled(false);
+            register_button.setEnabled(false);
+        }
+        else if (first_name_field.getText().toString().equals("") ||
+                last_name_field.getText().toString().equals("") ||
+                email_field.getText().toString().equals(""))
+        {
+            sign_in_button.setEnabled(true);
+            register_button.setEnabled(false);
+        }
+        else{
+            sign_in_button.setEnabled(true);
+            register_button.setEnabled(true);
+        }
+
     }
 
     @SuppressLint("ShowToast")
@@ -64,8 +96,11 @@ public class LoginFragment extends Fragment {
         email_field = (EditText)view.findViewById(R.id.field_email);
         gender_field = (RadioGroup)view.findViewById(R.id.radio_group_gender);
 
-        Button sign_in_button = (Button) view.findViewById(R.id.button_signin);
-        Button register_button = (Button) view.findViewById(R.id.button_register);
+        sign_in_button = (Button) view.findViewById(R.id.button_signin);
+        register_button = (Button) view.findViewById(R.id.button_register);
+
+        sign_in_button.setEnabled(true);
+        register_button.setEnabled(false);
 
         sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +114,25 @@ public class LoginFragment extends Fragment {
                 registerButtonClicked();
             }
         });
+
+        TextWatcher text_edit_watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkIfButtonsAvailable();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        };
+
+        host_field.addTextChangedListener(text_edit_watcher);
+        port_field.addTextChangedListener(text_edit_watcher);
+        user_field.addTextChangedListener(text_edit_watcher);
+        password_field.addTextChangedListener(text_edit_watcher);
+        first_name_field.addTextChangedListener(text_edit_watcher);
+        last_name_field.addTextChangedListener(text_edit_watcher);
+        email_field.addTextChangedListener(text_edit_watcher);
 
         return view;
     }
@@ -136,7 +190,7 @@ public class LoginFragment extends Fragment {
 
             publishProgress("Registering...");
 
-            HttpClient.start("192.168.1.100", "8080");
+            HttpClient.start(this.ip, this.port);
 
             return HttpClient.getInstance().register(request);
         }
@@ -147,15 +201,20 @@ public class LoginFragment extends Fragment {
         }
 
         protected void onPostExecute(RegisterResult registerResult) {
+
+            UserData user = UserData.getInstance();
+            user.auth_token = registerResult.authToken;
+
             if (!registerResult.success) {
+                if (registerResult.message == null)
+                    registerResult.message = "Couldn't connect to server!";
                 toast_message.setText(registerResult.message);
                 toast_message.show();
             }
             else
             {
-                main_activity = (MainActivity)getContext();
-                assert main_activity != null;
-                main_activity.switchToMapFragment();
+                GetPersonService getPersonService = new GetPersonService();
+                getPersonService.execute(registerResult.personID);
             }
         }
     }
@@ -177,6 +236,7 @@ public class LoginFragment extends Fragment {
 
         @Override
         protected LoginResult doInBackground(Void... voids) {
+            publishProgress("Logging in...");
 
             readFields();
 
@@ -184,7 +244,7 @@ public class LoginFragment extends Fragment {
             request.userName = this.user;
             request.password = this.password;
 
-            HttpClient.start("192.168.1.100", "8080");
+            HttpClient.start(this.ip, this.port);
 
             return HttpClient.getInstance().login(request);
         }
@@ -195,17 +255,45 @@ public class LoginFragment extends Fragment {
         }
 
         protected void onPostExecute(LoginResult loginResult) {
+            UserData user = UserData.getInstance();
+            user.auth_token = loginResult.authToken;
+
             if (!loginResult.success) {
+                if (loginResult.message == null)
+                    loginResult.message = "Couldn't connect to server!";
                 toast_message.setText(loginResult.message);
                 toast_message.show();
             }
             else
             {
-                main_activity = (MainActivity)getContext();
-                assert main_activity != null;
-                main_activity.switchToMapFragment();
+                GetPersonService getPersonService = new GetPersonService();
+                getPersonService.execute(loginResult.personID);
             }
         }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public class GetPersonService extends AsyncTask<String, String, PersonResult> {
+
+        public String id = "";
+
+        @Override
+        protected PersonResult doInBackground(String... id_list) {
+            UserData.getInstance().person_list = HttpClient.getInstance().getPersons();
+            UserData.getInstance().event_list = HttpClient.getInstance().getEvents();
+            return HttpClient.getInstance().getPerson(id_list[0]);
+        }
+
+        protected void onPostExecute(PersonResult person_result) {
+            UserData.getInstance().person = new Person(person_result.personID, person_result.associatedUsername, person_result.firstName, person_result.lastName,
+                    person_result.gender, person_result.fatherID, person_result.motherID, person_result.spouseID);
+//            toast_message.setText("User full name: " + person_result.firstName + " " + person_result.lastName);
+            toast_message.cancel();
+            main_activity = (MainActivity)getContext();
+            assert main_activity != null;
+            main_activity.switchToMapFragment();
+        }
+
     }
 
 

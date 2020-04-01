@@ -55,10 +55,12 @@ public class Event {
      * @param eventType type of event
      * @param year year of event
      */
-    public Event(String eventID, String associatedUsername, String personID, String eventType, String year){
+    public Event(String eventID, String associatedUsername, String personID, String latitude, String longitude, String eventType, String year){
         this.eventID = eventID.equals("") ? null : eventID;
         this.associatedUsername = associatedUsername.equals("") ? null : associatedUsername;
         this.personID = personID.equals("") ? null : personID;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.eventType = eventType.equals("") ? null : eventType;
         this.year = year.equals("") ? null : year;
     }
